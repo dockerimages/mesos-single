@@ -2,9 +2,8 @@ FROM dockerimages/ubuntu-vm:14.04
 RUN echo "deb http://repos.mesosphere.io/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
 RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 RUN sudo apt-get -y update
-RUN sudo apt-get install curl python-setuptools python-pip python-dev python-protobuf zookeeperd mesos deimos chronos marathon
+RUN sudo apt-get -y install --no-install-recomends curl python-setuptools python-pip python-dev python-protobuf zookeeperd mesos deimos chronos marathon docker.io
 RUN echo 1 | sudo dd of=/var/lib/zookeeper/myid
-RUN sudo apt-get install docker.io
 RUN sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
 RUN sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
 RUN sudo mkdir -p /etc/mesos-master
