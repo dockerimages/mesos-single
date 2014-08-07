@@ -20,3 +20,13 @@ RUN echo external | sudo tee /etc/mesos-slave/isolation
 #sudo restart marathon
 #sudo restart mesos-master
 #sudo restart mesos-slave
+# Adding to runit
+mkdir /etc/service/marathon && \
+mkdir /etc/service/zookeeper && \
+mkdir /etc/service/mesos-master && \
+mkdir /etc/service/mesos-slave && \
+echo <<EOF > /etc/service/marathon/run
+#!/bin/sh
+set -e
+exec /usr/sbin/sshd -D
+EOF>>
