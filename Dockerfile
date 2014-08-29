@@ -12,20 +12,17 @@ RUN sudo mkdir -p /etc/mesos-slave
 ## Configure Deimos as a containerizer
 RUN echo /usr/local/bin/deimos | sudo tee /etc/mesos-slave/containerizer_path
 RUN echo external | sudo tee /etc/mesos-slave/isolation
-
-#sudo initctl reload-configuration
-#sudo service docker.io restart
-#sudo restart zookeeper
-#sudo restart marathon
-#sudo restart mesos-master
-#sudo restart mesos-slave
+RUN sudo initctl reload-configuration
+RUN sudo service docker.io restart
+RUN sudo restart zookeeper
+RUN sudo restart marathon
+RUN sudo restart mesos-master
+RUN sudo restart mesos-slave
 # Adding to runit
-mkdir /etc/service/marathon && \
-mkdir /etc/service/zookeeper && \
-mkdir /etc/service/mesos-master && \
-mkdir /etc/service/mesos-slave && \
-echo <<EOF > /etc/service/marathon/run
-#!/bin/sh
-set -e
-exec /usr/sbin/sshd -D
-EOF>>
+RUN mkdir /etc/service/marathon && \
+RUN mkdir /etc/service/zookeeper && \
+RUN mkdir /etc/service/mesos-master && \
+RUN mkdir /etc/service/mesos-slave && \
+RUN echo "#!/bin/sh \n\
+set -e \n\
+exec /usr/sbin/sshd -D" > /etc/service/marathon/run
