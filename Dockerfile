@@ -20,9 +20,9 @@ RUN sudo restart mesos-master
 RUN sudo restart mesos-slave
 # Adding to runit
 RUN mkdir /etc/service/marathon && \
-RUN mkdir /etc/service/zookeeper && \
-RUN mkdir /etc/service/mesos-master && \
-RUN mkdir /etc/service/mesos-slave && \
-RUN echo "#!/bin/sh \n\
+ mkdir /etc/service/zookeeper && \
+ mkdir /etc/service/mesos-master && \
+ mkdir /etc/service/mesos-slave && \
+ echo "#!/bin/sh \n\
 set -e \n\
 exec /usr/sbin/sshd -D" > /etc/service/marathon/run
